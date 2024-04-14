@@ -8,3 +8,12 @@ test('renders a todo', () => {
 
   expect(todo.text()).toBe('Learn Vue.js 3')
 })
+
+test('creates a todo', async () => {
+  const wrapper = mount(TodoApp)
+
+  await wrapper.get('[data-test="new-todo"]').setValue('New todo')
+  await wrapper.get('[data-test="form"]').trigger('submit')
+
+  expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(2)
+})
